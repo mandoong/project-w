@@ -132,37 +132,6 @@ export class Canvas3d {
 
     const ctx = this.canvas.getContext("2d");
 
-    if (this.image) {
-      const img = new Image();
-      img.src = this.image;
-
-      const [p0, p1, p2, p3] = transformedDots;
-      const width = img.width;
-      const height = img.height;
-
-      const deltaX1 = p1.x - p0.x;
-      const deltaY1 = p1.y - p0.y;
-      const deltaX2 = p3.x - p0.x;
-      const deltaY2 = p3.y - p0.y;
-
-      const deltaU1 = width;
-      const deltaV1 = 0;
-      const deltaU2 = 0;
-      const deltaV2 = height;
-
-      const det = deltaU1 * deltaV2 - deltaU2 * deltaV1;
-      const a = (deltaX1 * deltaV2 - deltaX2 * deltaV1) / det;
-      const b = (deltaY1 * deltaV2 - deltaY2 * deltaV1) / det;
-      const c = (deltaX2 * deltaU1 - deltaX1 * deltaU2) / det;
-      const d = (deltaY2 * deltaU1 - deltaY1 * deltaU2) / det;
-      const e = p0.x;
-      const f = p0.y;
-
-      ctx.setTransform(a, b, c, d, e, f);
-      ctx.drawImage(img, 0, 0, width, height);
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-    }
-
     if (this.stroke) {
       ctx.strokeStyle = this.stroke;
       ctx.stroke(this.obj);

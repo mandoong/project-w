@@ -10,7 +10,8 @@
     </div>
     <div class="number">{{ _currentView }}</div>
     <PagesMain :active="_currentView === 0" />
-    <PagesMainSkill :active="_currentView === 1" />
+    <PagesMainSpace :active="_currentView === 1" />
+    <!-- <PagesMainSkill :active="_currentView === 1" /> -->
     <PagesMainCard :active="_currentView === 2" />
   </div>
 </template>

@@ -3,13 +3,15 @@
     <div
       v-if="_isActive"
       ref="r_list"
-      v-for="(e, i) in Array(8)"
+      v-for="(e, i) in items"
       :id="i"
       class="skill"
       :class="{active: activeTarget == i}"
-      :style="{}"
+      :style="{
+        zIndex: i
+      }"
     >
-      <div class="skill_inner">{{ i + 1 }}</div>
+      <img class="img" width="800" height="180" :src="`/images/${items?.[i]?.img}`">
     </div>
   </div>
 </template>
@@ -18,6 +20,15 @@
 const p_active = defineProps(["active"]);
 const _isActive = ref(false);
 const _onEvent = ref(false);
+
+const items = [
+  {name: 'vue', img: 'vue_icon.svg'},
+  {name: 'nuxt', img: 'nuxt_icon.svg'},
+  {name: 'react', img: 'react_icon.png'},
+  {name: 'next', img: 'next_icon.svg'},
+  {name: 'd3', img: 'd3_icon.svg'},
+  {name: 'mongo', img: 'mongo_icon.svg'},
+]
 
 watch(p_active, () => {
   if (p_active.active) {
@@ -58,7 +69,7 @@ const f_onMouse = (evt) => {
     count = 0
     currentTarget = evt.target.id
     timer = setInterval(() => {
-      if (count >= 5) {
+      if (count >= 2) {
         count = 0
         activeTarget.value = currentTarget
         clearInterval(timer)
@@ -76,7 +87,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .main_skill_wrap {
   position: absolute;
-  width: 120vw;
+  width: 100vw;
   height: 100vh;
   top: -100px;
   left: 0;
@@ -85,7 +96,7 @@ onMounted(() => {
 
   .skill {
     flex: 1 1 100%;
-    height: 130%;
+    height: 140%;
     transform: rotate(20deg) translateY(-5%);
     overflow: hidden;
     display: flex;
@@ -94,6 +105,12 @@ onMounted(() => {
     transition: all 300ms ease-in-out;
     border-left: 1px solid gray;
     opacity: 0;
+    background-color: #11120f;
+
+    .img {
+      transform: rotate(-90deg);
+      transition: all 1s ease;
+    }
 
     .skill_inner {
       background-color: antiquewhite;
@@ -102,7 +119,11 @@ onMounted(() => {
 
     &.active {
       flex: 1 1 300%;
-      height: 130%;
+      height: 140%;
+
+      .img {
+        transform: rotate(-20deg);
+      }
     }
 
     &:nth-child(even) {
