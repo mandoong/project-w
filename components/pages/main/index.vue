@@ -2,8 +2,8 @@
   <div class="main_page" :class="{ disable: !p_active.active }">
     <canvas class="canvas" ref="r_canvas" />
     <div class="main_warp">
-      <div class="title">Project Woong</div>
-      <div class="desc">Frontend Developer</div>
+      <div class="title">Dev.D</div>
+      <div class="desc">The devil is in the details</div>
     </div>
     <div class="svg_wrap">
       <svg class="svg">
